@@ -4,7 +4,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="dialog_action_ok">OK</string>
-    <string name="dialog_action_cancel">Cancel</string>
+    <string name="dialog_action_cancel">No</string>
 
     <string name="empty_ribots">There aren\'t any ribots</string>
     <string name="error_loading_ribots">There was a problem loading the ribots</string>
@@ -13,6 +13,9 @@
     <string name="signin">Sign in</string>
 
     <string formatted="false" name="weather_message">Hellow, %s! Now in %s %s degrees, %s</string>
+
+    <string name="exit_dialog_message">Do you want exit?</string>
+    <string name="exit_dialog_title">Exit</string>
 
     <!--Hints-->
     <string name="email_hint">enter you e-mail</string>
@@ -23,6 +26,9 @@
     <!--Errors-->
     <string name="text_input_empty_error">please, enter the data</string>
     <string name="dialog_error_title">Sorry!</string>
-    <string name="user_error_dialog_message">It seems that such a user does not exist. %n If you want, you can register</string>
+    <string name="user_error_dialog_message">It seems that such a user does not exist. \n Do you want sign up?</string>
     <string name="password_error">incorrect password</string>
+    <string name="email_error">incorrect e-mail</string>
+    <string name="input_data_error">incorrect data</string>
+    <string name="repeat_password_error">passwords must match</string>
 </resources>

@@ -3,6 +3,8 @@ package uk.co.ribot.androidboilerplate.util;
 import android.support.design.widget.TextInputLayout;
 import android.util.Patterns;
 
+import uk.co.ribot.androidboilerplate.R;
+
 /**
  * Created by Oromil on 27.11.2017.
  */
@@ -12,11 +14,11 @@ public class CheckUserDataUtil {
     public static final String PASSWORD_PATTERN = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}";
 
     public static boolean isEmailValid(TextInputLayout emailInputLayout){
-            return isDataValid(emailInputLayout, Patterns.EMAIL_ADDRESS.pattern());
+            return isDataValid(emailInputLayout, Patterns.EMAIL_ADDRESS.pattern(), R.string.email_error);
     }
 
     public static boolean isPasswordValid(TextInputLayout passwordInputLayout){
-        return isDataValid(passwordInputLayout, PASSWORD_PATTERN);
+        return isDataValid(passwordInputLayout, PASSWORD_PATTERN, R.string.password_error);
     }
 
     public static boolean isTextsEquals(TextInputLayout inputLayout1, TextInputLayout inputLayout2){
@@ -25,7 +27,7 @@ public class CheckUserDataUtil {
         if (text1.equals(text2)){
             return true;
         }else {
-            showError(inputLayout2, "texts must equals");
+            showError(inputLayout2, R.string.repeat_password_error);
             return false;
         }
     }
@@ -40,19 +42,23 @@ public class CheckUserDataUtil {
     }
 
     private static boolean isDataValid(TextInputLayout layout, String pattern){
+        return isDataValid(layout, pattern, R.string.input_data_error);
+    }
+
+    private static boolean isDataValid(TextInputLayout layout, String pattern, int msgErrorId){
         String text = layout.getEditText().getText().toString();
         if (text.matches(pattern)){
             layout.setErrorEnabled(false);
             return true;
         }else if (!isTextEmpty(layout)){
-            showError(layout, "incorrect data");
+            showError(layout, msgErrorId);
         }
         return false;
     }
 
     private static boolean isTextEmpty(TextInputLayout layout){
         if (layout.getEditText().getText().toString().isEmpty()){
-            showError(layout, "empty");
+            showError(layout, R.string.text_input_empty_error);
             return true;
         }else{
             return false;
@@ -63,5 +69,9 @@ public class CheckUserDataUtil {
         layout.setError(msgError);
         layout.setErrorEnabled(true);
         layout.getEditText().requestFocus();
+    }
+
+    public static void showError(TextInputLayout layout, int msgErrorId){
+        showError(layout, StringUtil.getStringById(msgErrorId));
     }
 }

@@ -18,17 +18,18 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     private DataManager mDataManager;
     private PreferencesHelper mPreferencesHelper;
     private RxEventBus mEventBus;
+
     @Inject
-    public MainPresenter(DataManager dataManager, RxEventBus eventBus){
+    public MainPresenter(DataManager dataManager, RxEventBus eventBus) {
         mEventBus = eventBus;
         mDataManager = dataManager;
         mPreferencesHelper = mDataManager.getPreferencesHelper();
     }
 
-    public boolean hasEnteredUser(){
-        Map<String, String>userData = mPreferencesHelper.getUserData();
+    public boolean hasEnteredUser() {
+        Map<String, String> userData = mPreferencesHelper.getUserData();
         String userEmail = userData.get(PreferencesHelper.USER_EMAIL);
-        if (userEmail!=null){
+        if (userEmail != null) {
             mEventBus.signInEvent(userData.get(PreferencesHelper.USER_NAME));
             return true;
         }

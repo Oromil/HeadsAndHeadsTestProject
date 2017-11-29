@@ -1,0 +1,30 @@
+<resources>
+    <string name="dialog_action_ok">OK</string>
+    <string name="dialog_action_cancel">Нет</string>
+
+    <string name="empty_ribots">There aren\'t any ribots</string>
+    <string name="error_loading_ribots">There was a problem loading the ribots</string>
+
+    <string name="sign_up">Вход</string>
+    <string name="signin">Регистрация</string>
+
+    <string formatted="false" name="weather_message">Здравствуйте, %s! Сейчас в %s %s градусов, %s</string>
+
+    <string name="exit_dialog_message">Вы хотите выйти?</string>
+    <string name="exit_dialog_title">Выйти</string>
+
+    <!--Hints-->
+    <string name="email_hint">введите свой e-mail</string>
+    <string name="name_hint">введите свое имя</string>
+    <string name="password_hint">введите свой пароль</string>
+    <string name="repeat_pass_hint">повторите пароль</string>
+
+    <!--Errors-->
+    <string name="text_input_empty_error">пожалуйста, введите данные</string>
+    <string name="dialog_error_title">Извините!</string>
+    <string name="user_error_dialog_message">Похоже, что такого пользователя не существует. \n Вы хотите зарегистрироваться?</string>
+    <string name="password_error">неверный пароль</string>
+    <string name="email_error">неверный e-mail</string>
+    <string name="input_data_error">неверные данные</string>
+    <string name="repeat_password_error">пароли должны совпадать</string>
+</resources>

@@ -1,6 +1,5 @@
 package uk.co.ribot.androidboilerplate.data.local;
 
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.VisibleForTesting;
 
@@ -14,11 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Scheduler;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import uk.co.ribot.androidboilerplate.data.model.Ribot;
 import uk.co.ribot.androidboilerplate.data.model.UserAccount;
@@ -44,24 +39,21 @@ public class DatabaseHelper {
     }
 
     public Observable<Ribot> setRibots(final Collection<Ribot> newRibots) {
-        return Observable.create(new ObservableOnSubscribe<Ribot>() {
-            @Override
-            public void subscribe(ObservableEmitter<Ribot> emitter) throws Exception {
-                if (emitter.isDisposed()) return;
-                BriteDatabase.Transaction transaction = mDb.newTransaction();
-                try {
-                    mDb.delete(Db.RibotProfileTable.TABLE_NAME, null);
-                    for (Ribot ribot : newRibots) {
-                        long result = mDb.insert(Db.RibotProfileTable.TABLE_NAME,
-                                Db.RibotProfileTable.toContentValues(ribot.profile()),
-                                SQLiteDatabase.CONFLICT_REPLACE);
-                        if (result >= 0) emitter.onNext(ribot);
-                    }
-                    transaction.markSuccessful();
-                    emitter.onComplete();
-                } finally {
-                    transaction.end();
+        return Observable.create(emitter -> {
+            if (emitter.isDisposed()) return;
+            BriteDatabase.Transaction transaction = mDb.newTransaction();
+            try {
+                mDb.delete(Db.RibotProfileTable.TABLE_NAME, null);
+                for (Ribot ribot : newRibots) {
+                    long result = mDb.insert(Db.RibotProfileTable.TABLE_NAME,
+                            Db.RibotProfileTable.toContentValues(ribot.profile()),
+                            SQLiteDatabase.CONFLICT_REPLACE);
+                    if (result >= 0) emitter.onNext(ribot);
                 }
+                transaction.markSuccessful();
+                emitter.onComplete();
+            } finally {
+                transaction.end();
             }
         });
     }
@@ -69,24 +61,14 @@ public class DatabaseHelper {
     public Observable<List<Ribot>> getRibots() {
         return mDb.createQuery(Db.RibotProfileTable.TABLE_NAME,
                 "SELECT * FROM " + Db.RibotProfileTable.TABLE_NAME)
-                .mapToList(new Function<Cursor, Ribot>() {
-                    @Override
-                    public Ribot apply(@NonNull Cursor cursor) throws Exception {
-                        return Ribot.create(Db.RibotProfileTable.parseCursor(cursor));
-                    }
-                });
+                .mapToList(cursor -> Ribot.create(Db.RibotProfileTable.parseCursor(cursor)));
     }
 
     public Observable<UserAccount> getUser(String email) {
         Observable<UserAccount> user = mDb.createQuery(Db.AccountsTable.TABLE_NAME,
                 "SELECT * FROM " + Db.AccountsTable.TABLE_NAME + " WHERE " +
                         Db.AccountsTable.COLUMN_EMAIL + " = '" + email + "'")
-                .mapToOneOrDefault(new Function<Cursor, UserAccount>() {
-                    @Override
-                    public UserAccount apply(Cursor cursor) throws Exception {
-                        return Db.AccountsTable.parseCursor(cursor);
-                    }
-                }, new UserAccount("null", "null", "null"));
+                .mapToOneOrDefault(cursor -> Db.AccountsTable.parseCursor(cursor), UserAccount.getEmptyUser());
         return user;
     }
 
@@ -94,31 +76,22 @@ public class DatabaseHelper {
 
         return mDb.createQuery(Db.AccountsTable.TABLE_NAME,
                 "SELECT * FROM " + Db.AccountsTable.TABLE_NAME)
-                .mapToList(new Function<Cursor, UserAccount>() {
-                    @Override
-                    public UserAccount apply(Cursor cursor) throws Exception {
-                        return Db.AccountsTable.parseCursor(cursor);
-                    }
-                });
+                .mapToList(cursor -> Db.AccountsTable.parseCursor(cursor));
     }
 
     public Observable<UserAccount> addUser(final UserAccount user) {
-        return Observable.create(new ObservableOnSubscribe<UserAccount>() {
-            @Override
-            public void subscribe(ObservableEmitter<UserAccount> emitter) throws Exception {
-                if (emitter.isDisposed()) {
-                    return;
-                }
-                BriteDatabase.Transaction transaction = mDb.newTransaction();
-                try {
-                    long result = mDb.insert(Db.AccountsTable.TABLE_NAME, Db.AccountsTable.toContentValues(user));
-                    if (result >= 0)
-                        emitter.onNext(user);
-                    transaction.markSuccessful();
-//                    emitter.onComplete();
-                } finally {
-                    transaction.end();
-                }
+        return Observable.create(emitter -> {
+            if (emitter.isDisposed()) {
+                return;
+            }
+            BriteDatabase.Transaction transaction = mDb.newTransaction();
+            try {
+                long result = mDb.insert(Db.AccountsTable.TABLE_NAME, Db.AccountsTable.toContentValues(user));
+                if (result >= 0)
+                    emitter.onNext(user);
+                transaction.markSuccessful();
+            } finally {
+                transaction.end();
             }
         });
 

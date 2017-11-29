@@ -1,7 +1,6 @@
 package uk.co.ribot.androidboilerplate.ui.content;
 
-import org.reactivestreams.Subscription;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -30,8 +29,9 @@ import uk.co.ribot.androidboilerplate.util.RxUtil;
 public class ContentPresenter extends BasePresenter<ContentMvpView> {
 
     private final DataManager mDataManager;
-    private Disposable mDisposable;
-    private Subscription mSubscription;
+    private Disposable mRibotDisposable = null;
+    private Disposable mWeatherDisposable = null;
+    ArrayList<Disposable> mDisposables;
     private PreferencesHelper mPreferencesHelper;
     private RxEventBus mEventBus;
 
@@ -40,6 +40,7 @@ public class ContentPresenter extends BasePresenter<ContentMvpView> {
         mDataManager = dataManager;
         mEventBus = eventBus;
         mPreferencesHelper = mDataManager.getPreferencesHelper();
+        mDisposables = new ArrayList<>();
     }
 
     @Override
@@ -50,8 +51,8 @@ public class ContentPresenter extends BasePresenter<ContentMvpView> {
 
     private void onViewAttached() {
         final String[] name = new String[1];
-        RxUtil.cancel(mSubscription);
-        mEventBus.filteredObservable(String.class)
+        RxUtil.dispose(mWeatherDisposable);
+        mWeatherDisposable = mEventBus.filteredObservable(String.class)
                 .subscribeOn(Schedulers.io())
                 .flatMap(s -> {
                     name[0] = s;
@@ -71,19 +72,20 @@ public class ContentPresenter extends BasePresenter<ContentMvpView> {
     @Override
     public void detachView() {
         super.detachView();
-        if (mDisposable != null) mDisposable.dispose();
+        if (mRibotDisposable != null) mRibotDisposable.dispose();
+        if (mWeatherDisposable != null) mWeatherDisposable.dispose();
     }
 
     public void loadRibots() {
         checkViewAttached();
-        RxUtil.dispose(mDisposable);
+        RxUtil.dispose(mRibotDisposable);
         mDataManager.getRibots()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<List<Ribot>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        mDisposable = d;
+                        mRibotDisposable = d;
                     }
 
                     @Override
@@ -106,11 +108,6 @@ public class ContentPresenter extends BasePresenter<ContentMvpView> {
 
                     }
                 });
-    }
-
-    private io.reactivex.Observable<String> getActiveUserName(String email) {
-        return mDataManager.getUser(email)
-                .map(account -> account.getName());
     }
 
     public void clearUserData() {

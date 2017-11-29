@@ -120,6 +120,6 @@ public class SignInActivity extends BaseActivity<SignInPresenter, SignInMvpView>
 
     @Override
     public void showPasswordError() {
-        CheckUserDataUtil.showError(passwordInputLayout, "incorrect password");
+        CheckUserDataUtil.showError(passwordInputLayout, R.string.password_error);
     }
 }

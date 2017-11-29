@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="4dp"
-            android:background="@color/primary"
+            android:background="@color/primary_dark"
             android:theme="@style/MainActivityTheme"
             app:title="title"/>
     </android.support.design.widget.AppBarLayout>
@@ -71,7 +71,7 @@
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/gray">
+            app:passwordToggleTint="@color/text_color">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/etPassword"
@@ -91,7 +91,7 @@
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/gray"
+            app:passwordToggleTint="@color/text_color"
             tools:visibility="visible">
 
             <android.support.design.widget.TextInputEditText

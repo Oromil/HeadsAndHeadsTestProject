@@ -21,7 +21,6 @@ import uk.co.ribot.androidboilerplate.util.RxUtil;
 
 public class RegisterPresenter extends BasePresenter<RegisterMvpView> {
 
-    private static final String TAG = "Register";
     private DataManager mDataManager;
     private Disposable mDisposable;
     private PreferencesHelper mPreferencesHelper;
@@ -42,7 +41,6 @@ public class RegisterPresenter extends BasePresenter<RegisterMvpView> {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .concatMap(account -> {
-                    Log.d(TAG, "concat");
                     if (account.getEmail().equals("null"))
                         return mDataManager.saveUser(new UserAccount(email, name, pass));
                     else throw new Exception("error");
@@ -55,7 +53,6 @@ public class RegisterPresenter extends BasePresenter<RegisterMvpView> {
 
                     @Override
                     public void onNext(UserAccount account) {
-                        Log.d(TAG, "onNext");
                         mPreferencesHelper.putUserData(email, pass, name);
                         mEventBus.signInEvent(name);
                         onComplete();
@@ -63,7 +60,6 @@ public class RegisterPresenter extends BasePresenter<RegisterMvpView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(TAG, "onError");
                         e.printStackTrace();
                         getMvpView().showToast("User is already registered");
                         getMvpView().showProgress(false);
@@ -71,7 +67,6 @@ public class RegisterPresenter extends BasePresenter<RegisterMvpView> {
 
                     @Override
                     public void onComplete() {
-                        Log.d(TAG, "onComplete");
                         getMvpView().showProgress(false);
                         getMvpView().navigateToContentActivity();
                     }

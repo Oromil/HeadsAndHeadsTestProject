@@ -6,6 +6,8 @@ package uk.co.ribot.androidboilerplate.data.model;
 
 public class UserAccount {
 
+    public static final String EMPTY_USER_DATA = "null";
+
     String email;
     String password;
     String name;
@@ -14,6 +16,12 @@ public class UserAccount {
         this.email = email;
         this.name = name;
         this.password = password;
+    }
+
+    private UserAccount(){
+        this.email = EMPTY_USER_DATA;
+        this.name = EMPTY_USER_DATA;
+        this.password = EMPTY_USER_DATA;
     }
 
     public String getName() {
@@ -26,5 +34,9 @@ public class UserAccount {
 
     public String getPassword() {
         return password;
+    }
+
+    public static UserAccount getEmptyUser(){
+        return new UserAccount();
     }
 }

@@ -4,7 +4,7 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+    android:background="@color/text_color"
     tools:context=".ui.content.ContentActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -20,8 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="4dp"
-            android:background="@color/primary"
-            app:theme="@style/ContentActivityActionBar"
+            android:background="@color/primary_dark"
             app:title="title"/>
     </android.support.design.widget.AppBarLayout>
 
@@ -32,6 +31,6 @@
         android:clipToPadding="false"
         android:paddingBottom="6dp"
         android:paddingTop="6dp"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"/>
 
 </RelativeLayout>
