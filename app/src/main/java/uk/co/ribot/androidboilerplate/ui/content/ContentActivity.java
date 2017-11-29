@@ -87,8 +87,8 @@ public class ContentActivity extends BaseActivity<ContentPresenter, ContentMvpVi
     }
 
     @Override
-    public void showError() {
-        DialogFactory.createGenericErrorDialog(this, getString(R.string.error_loading_ribots))
+    public void showError(int messageId) {
+        DialogFactory.createGenericErrorDialog(this, getString(messageId))
                 .show();
     }
 

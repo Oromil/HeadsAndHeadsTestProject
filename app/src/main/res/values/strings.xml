@@ -12,7 +12,7 @@
     <string name="sign_up">Sign up</string>
     <string name="signin">Sign in</string>
 
-    <string formatted="false" name="weather_message">Hellow, %s! Now in %s %s degrees, %s</string>
+    <string name="weather_message" formatted="false">Hellow, %s! Now in %s %s degrees, %s</string>
 
     <string name="exit_dialog_message">Do you want exit?</string>
     <string name="exit_dialog_title">Exit</string>
@@ -31,4 +31,6 @@
     <string name="email_error">incorrect e-mail</string>
     <string name="input_data_error">incorrect data</string>
     <string name="repeat_password_error">passwords must match</string>
+    <string name="network_error">no internet</string>
+    <string name="snackbar_network_error_message">Hellow, %s! Sorry, but weather forecast not available because there is no internet connection</string>
 </resources>

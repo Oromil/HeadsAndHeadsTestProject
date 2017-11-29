@@ -11,7 +11,7 @@ public interface ContentMvpView extends MvpView {
 
     void showRibotsEmpty();
 
-    void showError();
+    void showError(int messageId);
 
     void showSnackBar(String message);
 

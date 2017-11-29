@@ -66,7 +66,9 @@ public class ContentPresenter extends BasePresenter<ContentMvpView> {
                     ContentPresenter.this.getMvpView().showSnackBar(String.format(BoilerplateApplication.getContext()
                                     .getResources().getString(R.string.weather_message), name[0],
                             weatherMap.get(Weather.CITY), weatherMap.get(Weather.TEMP), weatherMap.get(Weather.DESCRIPTION)));
-                });
+
+                }, throwable -> getMvpView().showSnackBar(String.format(BoilerplateApplication.getContext()
+                        .getString(R.string.snackbar_network_error_message), name[0])));
     }
 
     @Override
@@ -100,7 +102,7 @@ public class ContentPresenter extends BasePresenter<ContentMvpView> {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         Timber.e(e, "There was an error loading the ribots.");
-                        getMvpView().showError();
+                        getMvpView().showError(R.string.error_loading_ribots);
                     }
 
                     @Override

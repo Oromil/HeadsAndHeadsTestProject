@@ -5,8 +5,8 @@
     <string name="empty_ribots">There aren\'t any ribots</string>
     <string name="error_loading_ribots">There was a problem loading the ribots</string>
 
-    <string name="sign_up">Вход</string>
-    <string name="signin">Регистрация</string>
+    <string name="sign_up">Регистрация</string>
+    <string name="signin">Вход</string>
 
     <string formatted="false" name="weather_message">Здравствуйте, %s! Сейчас в %s %s градусов, %s</string>
 
@@ -27,4 +27,7 @@
     <string name="email_error">неверный e-mail</string>
     <string name="input_data_error">неверные данные</string>
     <string name="repeat_password_error">пароли должны совпадать</string>
+    <string name="network_error">Нет интернета</string>
+    <string name="snackbar_network_error_message">Здравствуйте, %s! Извините, но прогноз погоды не доступен, так как отсутствует интернет соединение</string>
+
 </resources>
