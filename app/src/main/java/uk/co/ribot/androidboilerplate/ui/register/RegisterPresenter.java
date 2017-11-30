@@ -1,7 +1,5 @@
 package uk.co.ribot.androidboilerplate.ui.register;
 
-import android.util.Log;
-
 import javax.inject.Inject;
 
 import io.reactivex.Observer;
@@ -34,7 +32,6 @@ public class RegisterPresenter extends BasePresenter<RegisterMvpView> {
     }
 
     public void saveUser(final String email, final String name, final String pass) {
-        getMvpView().showProgress(true);
         RxUtil.dispose(mDisposable);
 
         mDataManager.getUser(email)
@@ -67,7 +64,6 @@ public class RegisterPresenter extends BasePresenter<RegisterMvpView> {
 
                     @Override
                     public void onComplete() {
-                        getMvpView().showProgress(false);
                         getMvpView().navigateToContentActivity();
                     }
                 });

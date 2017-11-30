@@ -73,6 +73,7 @@ public class ContentActivity extends BaseActivity<ContentPresenter, ContentMvpVi
         if (getIntent().getBooleanExtra(EXTRA_TRIGGER_SYNC_FLAG, true)) {
             startService(SyncService.getStartIntent(this));
         }
+
     }
 
     @Override
@@ -112,7 +113,7 @@ public class ContentActivity extends BaseActivity<ContentPresenter, ContentMvpVi
     }
 
     public void showExitDialog() {
-        AlertDialog dialog = new AlertDialog.Builder(this, R.style.CustomDialog)
+        AlertDialog dialog = new AlertDialog.Builder(this)
                 .setMessage(R.string.exit_dialog_message)
                 .setTitle(R.string.exit_dialog_title)
                 .setNegativeButton(R.string.dialog_action_cancel, (dialog1, which) -> dialog1.dismiss())

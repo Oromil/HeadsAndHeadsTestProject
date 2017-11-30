@@ -11,6 +11,8 @@
 
     <string name="sign_up">Sign up</string>
     <string name="signin">Sign in</string>
+    <string name="authorization">Authorization</string>
+    <string name="registration">Registration</string>
     <string name="persons">Persons</string>
 
     <string name="weather_message" formatted="false">Hellow, %s! Now in %s %s degrees, %s</string>
@@ -19,10 +21,10 @@
     <string name="exit_dialog_title">Exit</string>
 
     <!--Hints-->
-    <string name="email_hint">enter you e-mail</string>
-    <string name="name_hint">enter you name</string>
-    <string name="password_hint">enter you password</string>
-    <string name="repeat_pass_hint">repeat you password</string>
+    <string name="email_hint">e-mail</string>
+    <string name="name_hint">Name</string>
+    <string name="password_hint">Password</string>
+    <string name="repeat_pass_hint">Repeat password</string>
 
     <!--Errors-->
     <string name="text_input_empty_error">please, enter the data</string>

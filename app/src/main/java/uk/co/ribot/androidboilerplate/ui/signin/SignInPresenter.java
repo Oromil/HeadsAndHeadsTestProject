@@ -63,7 +63,7 @@ public class SignInPresenter extends BasePresenter<SignInMvpView> {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        getMvpView().showProgress(false);
                     }
 
                     @Override

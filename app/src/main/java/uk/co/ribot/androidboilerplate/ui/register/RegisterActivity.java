@@ -62,6 +62,12 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterMv
         component.inject(this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showProgress(false);
+    }
+
     public static void start(Context context) {
         Intent starter = new Intent(context, RegisterActivity.class);
         context.startActivity(starter);
@@ -82,6 +88,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterMv
                     && CheckUserDataUtil.isNameValid(nameInputLayout)
                     && CheckUserDataUtil.isPasswordValid(passwordInputLayout)
                     && CheckUserDataUtil.isTextsEquals(passwordInputLayout, repeatPassInputLayout)) {
+                showProgress(true);
                 getPresenter().saveUser(email, name, password);
             }
         });
@@ -91,7 +98,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterMv
     protected void setupActionBar(){
         setSupportActionBar(toolbar);
         final ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(R.string.sign_up);
+        actionBar.setTitle(R.string.registration);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_back);

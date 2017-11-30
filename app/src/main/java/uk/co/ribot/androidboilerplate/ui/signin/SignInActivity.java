@@ -8,6 +8,8 @@ import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -54,6 +56,12 @@ public class SignInActivity extends BaseActivity<SignInPresenter, SignInMvpView>
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        showProgress(false);
+    }
+
+    @Override
     protected void setupViews() {
         super.setupViews();
         btnEnter.setOnClickListener(v -> {
@@ -69,10 +77,26 @@ public class SignInActivity extends BaseActivity<SignInPresenter, SignInMvpView>
     protected void setupActionBar(){
         setSupportActionBar(toolbar);
         final ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(R.string.signin);
+        actionBar.setTitle(R.string.authorization);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_back);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_register:
+                navigateToRegisterActivity();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -84,20 +108,21 @@ public class SignInActivity extends BaseActivity<SignInPresenter, SignInMvpView>
 
     @Override
     public void navigateToContentActivity() {
+        showProgress(true);
         ContentActivity.start(this);
         finish();
     }
 
     @Override
     public void navigateToRegisterActivity() {
+        showProgress(true);
         RegisterActivity.start(this);
-        finish();
     }
 
     @Override
     public void showUserErrorDialog() {
 
-        AlertDialog dialog = new AlertDialog.Builder(this, R.style.CustomDialog)
+        AlertDialog dialog = new AlertDialog.Builder(this)
                     .setMessage(R.string.user_error_dialog_message)
                     .setTitle(R.string.dialog_error_title)
                     .setNegativeButton(R.string.dialog_action_cancel, (dialog1, which) -> dialog1.dismiss())
