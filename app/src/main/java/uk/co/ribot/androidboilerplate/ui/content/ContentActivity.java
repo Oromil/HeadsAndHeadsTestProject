@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -54,12 +55,18 @@ public class ContentActivity extends BaseActivity<ContentPresenter, ContentMvpVi
     }
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_content;
+    }
+
+    @Override
+    public void onCompanentCreated(@NonNull ActivityComponent component) {
+        component.inject(this);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setupActionBar();
-        mRecyclerView.setAdapter(mRibotsAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         getPresenter().loadRibots();
 
@@ -69,13 +76,53 @@ public class ContentActivity extends BaseActivity<ContentPresenter, ContentMvpVi
     }
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.activity_content;
+    protected void setupViews() {
+        super.setupViews();
+        mRecyclerView.setAdapter(mRibotsAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
-    public void onCompanentCreated(@NonNull ActivityComponent component) {
-        component.inject(this);
+    protected void setupActionBar() {
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(R.string.persons);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_content_activity, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_exit:
+                showExitDialog();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.finishAffinity();
+    }
+
+    public void showExitDialog() {
+        AlertDialog dialog = new AlertDialog.Builder(this, R.style.CustomDialog)
+                .setMessage(R.string.exit_dialog_message)
+                .setTitle(R.string.exit_dialog_title)
+                .setNegativeButton(R.string.dialog_action_cancel, (dialog1, which) -> dialog1.dismiss())
+                .setPositiveButton(R.string.dialog_action_ok, (dialog12, which) -> {
+                    getPresenter().clearUserData();
+                    finish();
+                })
+                .create();
+
+        dialog.show();
     }
 
     /***** MVP View methods implementation *****/
@@ -107,49 +154,9 @@ public class ContentActivity extends BaseActivity<ContentPresenter, ContentMvpVi
         Toast.makeText(this, R.string.empty_ribots, Toast.LENGTH_LONG).show();
     }
 
-    private void setupActionBar() {
-        setSupportActionBar(toolbar);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_content_activity, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_exit:
-                showExitDialog();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        this.finishAffinity();
-    }
-
-    public void showExitDialog(){
-        AlertDialog dialog = new AlertDialog.Builder(this, R.style.CustomDialog)
-                .setMessage(R.string.exit_dialog_message)
-                .setTitle(R.string.exit_dialog_title)
-                .setNegativeButton(R.string.dialog_action_cancel, (dialog1, which) -> dialog1.dismiss())
-                .setPositiveButton(R.string.dialog_action_ok, (dialog12, which) -> {
-                    getPresenter().clearUserData();
-                    finish();
-                })
-                .create();
-
-        dialog.show();
-    }
 
     public static void start(Context context) {
         Intent starter = new Intent(context, ContentActivity.class);
-//        starter.putExtra();
         context.startActivity(starter);
     }
 }

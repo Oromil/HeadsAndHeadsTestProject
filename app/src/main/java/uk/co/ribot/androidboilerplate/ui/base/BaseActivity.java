@@ -59,6 +59,7 @@ public abstract class BaseActivity<P extends Presenter, V extends MvpView> exten
         onCompanentCreated(mActivityComponent);
         setContentView();
         ButterKnife.bind(this);
+        setupViews();
         mPresenter.attachView((V)this);
 
     }
@@ -79,6 +80,12 @@ public abstract class BaseActivity<P extends Presenter, V extends MvpView> exten
 
         mPresenter.detachView();
     }
+
+    protected void setupViews(){
+        setupActionBar();
+    }
+
+    protected void setupActionBar(){}
 
     public ActivityComponent activityComponent() {
         return mActivityComponent;

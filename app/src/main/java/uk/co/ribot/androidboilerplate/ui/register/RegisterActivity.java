@@ -2,7 +2,6 @@ package uk.co.ribot.androidboilerplate.ui.register;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
@@ -54,9 +53,26 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterMv
     Toolbar toolbar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setupViews();
+    protected int getLayoutId() {
+        return R.layout.user_input_layout;
+    }
+
+    @Override
+    public void onCompanentCreated(@NonNull ActivityComponent component) {
+        component.inject(this);
+    }
+
+    public static void start(Context context) {
+        Intent starter = new Intent(context, RegisterActivity.class);
+        context.startActivity(starter);
+    }
+
+    @Override
+    protected void setupViews() {
+        super.setupViews();
+        nameInputLayout.setVisibility(VISIBLE);
+        repeatPassInputLayout.setVisibility(VISIBLE);
+        btnApply.setText(R.string.sign_up);
 
         btnApply.setOnClickListener(v -> {
             String email = etEmail.getText().toString();
@@ -72,28 +88,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterMv
     }
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.user_input_layout;
-    }
-
-    @Override
-    public void onCompanentCreated(@NonNull ActivityComponent component) {
-        component.inject(this);
-    }
-
-    public static void start(Context context) {
-        Intent starter = new Intent(context, RegisterActivity.class);
-        context.startActivity(starter);
-    }
-
-    private void setupViews() {
-        setupToolBar();
-        nameInputLayout.setVisibility(VISIBLE);
-        repeatPassInputLayout.setVisibility(VISIBLE);
-        btnApply.setText(R.string.sign_up);
-    }
-
-    private void setupToolBar(){
+    protected void setupActionBar(){
         setSupportActionBar(toolbar);
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.sign_up);

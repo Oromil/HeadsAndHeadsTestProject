@@ -11,6 +11,7 @@
 
     <string name="sign_up">Sign up</string>
     <string name="signin">Sign in</string>
+    <string name="persons">Persons</string>
 
     <string name="weather_message" formatted="false">Hellow, %s! Now in %s %s degrees, %s</string>
 

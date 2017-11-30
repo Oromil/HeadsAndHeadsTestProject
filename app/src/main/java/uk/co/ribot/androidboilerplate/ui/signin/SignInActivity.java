@@ -3,7 +3,6 @@ package uk.co.ribot.androidboilerplate.ui.signin;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -45,20 +44,6 @@ public class SignInActivity extends BaseActivity<SignInPresenter, SignInMvpView>
     Toolbar toolbar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setupViews();
-        btnEnter.setOnClickListener(v -> {
-            String email = etEmail.getText().toString();
-            String password = etPassword.getText().toString();
-            if (CheckUserDataUtil.isEmailValid(emailInputLayout)) {
-                getPresenter().signIn(email, password);
-            }
-        });
-    }
-
-    @Override
     protected int getLayoutId() {
         return R.layout.user_input_layout;
     }
@@ -69,23 +54,32 @@ public class SignInActivity extends BaseActivity<SignInPresenter, SignInMvpView>
     }
 
     @Override
-    public void showProgress(boolean show) {
-        if (show)
-            progressBar.setVisibility(View.VISIBLE);
-        else progressBar.setVisibility(View.GONE);
+    protected void setupViews() {
+        super.setupViews();
+        btnEnter.setOnClickListener(v -> {
+            String email = etEmail.getText().toString();
+            String password = etPassword.getText().toString();
+            if (CheckUserDataUtil.isEmailValid(emailInputLayout)) {
+                getPresenter().signIn(email, password);
+            }
+        });
     }
 
-    private void setupViews(){
-        setupToolBar();
-    }
-
-    private void setupToolBar(){
+    @Override
+    protected void setupActionBar(){
         setSupportActionBar(toolbar);
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.signin);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_back);
+    }
+
+    @Override
+    public void showProgress(boolean show) {
+        if (show)
+            progressBar.setVisibility(View.VISIBLE);
+        else progressBar.setVisibility(View.GONE);
     }
 
     @Override

@@ -7,6 +7,7 @@
 
     <string name="sign_up">Регистрация</string>
     <string name="signin">Вход</string>
+    <string name="persons">Люди</string>
 
     <string formatted="false" name="weather_message">Здравствуйте, %s! Сейчас в %s %s градусов, %s</string>
 
