@@ -13,7 +13,9 @@ public interface SignInMvpView extends MvpView {
 
     void navigateToRegisterActivity();
 
-    void showUserErrorDialog();
+    void showUserErrorDialog(String email);
 
-    void showPasswordError();
+    void showPasswordError(boolean show);
+
+    void showEmailError(boolean show);
 }

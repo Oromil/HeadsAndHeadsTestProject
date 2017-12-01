@@ -28,6 +28,7 @@ public class RxEventBus {
     public void post(Object event) {
         mBusSubject.onNext(event);
     }
+
     public void signInEvent(String username) {
         mBusSubject.onNext(username);
     }

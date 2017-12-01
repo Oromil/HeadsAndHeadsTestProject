@@ -21,12 +21,19 @@ public interface ApplicationComponent {
 
     void inject(SyncService syncService);
 
-    @ApplicationContext Context context();
+    @ApplicationContext
+    Context context();
+
     Application application();
+
     RibotsService ribotsService();
+
     PreferencesHelper preferencesHelper();
+
     DatabaseHelper databaseHelper();
+
     DataManager dataManager();
+
     RxEventBus eventBus();
 
 }

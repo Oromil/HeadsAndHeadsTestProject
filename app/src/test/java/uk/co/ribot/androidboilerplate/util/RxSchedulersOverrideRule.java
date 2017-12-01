@@ -3,6 +3,7 @@ package uk.co.ribot.androidboilerplate.util;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
+
 import java.util.concurrent.Callable;
 
 import io.reactivex.Scheduler;

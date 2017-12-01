@@ -27,13 +27,13 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class ContentPresenterTest {
 
-    @Mock
-    ContentMvpView mMockContentMvpView;
-    @Mock DataManager mMockDataManager;
-    private ContentPresenter mContentPresenter;
-
     @Rule
     public final RxSchedulersOverrideRule mOverrideSchedulersRule = new RxSchedulersOverrideRule();
+    @Mock
+    ContentMvpView mMockContentMvpView;
+    @Mock
+    DataManager mMockDataManager;
+    private ContentPresenter mContentPresenter;
 
     @Before
     public void setUp() {

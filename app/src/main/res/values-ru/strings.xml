@@ -11,7 +11,7 @@
     <string name="registration">Регистрация</string>
     <string name="persons">Люди</string>
 
-    <string formatted="false" name="weather_message">Здравствуйте, %s! Сейчас в %s %s градусов, %s</string>
+    <string name="weather_message" formatted="false">Здравствуйте, %s! Сейчас в %s %s градусов, %s</string>
 
     <string name="exit_dialog_message">Вы хотите выйти?</string>
     <string name="exit_dialog_title">Выйти</string>
@@ -31,6 +31,6 @@
     <string name="input_data_error">неверные данные</string>
     <string name="repeat_password_error">пароли должны совпадать</string>
     <string name="network_error">Нет интернета</string>
-    <string name="snackbar_network_error_message">Здравствуйте, %s! Извините, но прогноз погоды не доступен, так как отсутствует интернет соединение</string>
+    <string name="snackbar_error_message">Здравствуйте, %s! Извините, но прогноз погоды не доступен, так как отсутствует интернет соединение</string>
 
 </resources>

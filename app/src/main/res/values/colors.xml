@@ -4,4 +4,5 @@
     <color name="orange">#ff9b00</color>
     <color name="primary">#ffffff</color>
     <color name="accent">#4e92df</color>
+    <color name="gray">#212221</color>
 </resources>

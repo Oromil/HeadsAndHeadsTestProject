@@ -34,9 +34,12 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class DataManagerTest {
 
-    @Mock DatabaseHelper mMockDatabaseHelper;
-    @Mock PreferencesHelper mMockPreferencesHelper;
-    @Mock RibotsService mMockRibotsService;
+    @Mock
+    DatabaseHelper mMockDatabaseHelper;
+    @Mock
+    PreferencesHelper mMockPreferencesHelper;
+    @Mock
+    RibotsService mMockRibotsService;
     private DataManager mDataManager;
 
     @Before

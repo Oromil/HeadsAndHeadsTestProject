@@ -10,8 +10,6 @@ import com.google.gson.TypeAdapter;
 @AutoValue
 public abstract class Ribot implements Comparable<Ribot>, Parcelable {
 
-    public abstract Profile profile();
-
     public static Ribot create(Profile profile) {
         return new AutoValue_Ribot(profile);
     }
@@ -19,6 +17,8 @@ public abstract class Ribot implements Comparable<Ribot>, Parcelable {
     public static TypeAdapter<Ribot> typeAdapter(Gson gson) {
         return new AutoValue_Ribot.GsonTypeAdapter(gson);
     }
+
+    public abstract Profile profile();
 
     @Override
     public int compareTo(@NonNull Ribot another) {

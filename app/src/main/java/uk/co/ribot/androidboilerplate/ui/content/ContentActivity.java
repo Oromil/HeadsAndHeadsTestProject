@@ -28,7 +28,8 @@ import uk.co.ribot.androidboilerplate.injection.component.ActivityComponent;
 import uk.co.ribot.androidboilerplate.ui.base.BaseActivity;
 import uk.co.ribot.androidboilerplate.util.DialogFactory;
 
-public class ContentActivity extends BaseActivity<ContentPresenter, ContentMvpView> implements ContentMvpView {
+public class ContentActivity extends BaseActivity<ContentPresenter, ContentMvpView>
+        implements ContentMvpView {
 
     private static final String EXTRA_TRIGGER_SYNC_FLAG =
             "uk.co.ribot.androidboilerplate.ui.main.ContentActivity.EXTRA_TRIGGER_SYNC_FLAG";
@@ -52,6 +53,11 @@ public class ContentActivity extends BaseActivity<ContentPresenter, ContentMvpVi
         Intent intent = new Intent(context, ContentActivity.class);
         intent.putExtra(EXTRA_TRIGGER_SYNC_FLAG, triggerDataSyncOnCreate);
         return intent;
+    }
+
+    public static void start(Context context) {
+        Intent starter = new Intent(context, ContentActivity.class);
+        context.startActivity(starter);
     }
 
     @Override
@@ -153,11 +159,5 @@ public class ContentActivity extends BaseActivity<ContentPresenter, ContentMvpVi
         mRibotsAdapter.setRibots(Collections.<Ribot>emptyList());
         mRibotsAdapter.notifyDataSetChanged();
         Toast.makeText(this, R.string.empty_ribots, Toast.LENGTH_LONG).show();
-    }
-
-
-    public static void start(Context context) {
-        Intent starter = new Intent(context, ContentActivity.class);
-        context.startActivity(starter);
     }
 }

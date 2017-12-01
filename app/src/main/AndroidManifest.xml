@@ -3,7 +3,7 @@
     package="uk.co.ribot.androidboilerplate">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".BoilerplateApplication"
@@ -21,12 +21,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.register.RegisterActivity"
-            android:parentActivityName=".ui.signin.SignInActivity"/>
-        <activity android:name=".ui.content.ContentActivity"/>
+        <activity
+            android:name=".ui.register.RegisterActivity"
+            android:parentActivityName=".ui.signin.SignInActivity" />
+        <activity android:name=".ui.content.ContentActivity" />
         <activity
             android:name=".ui.signin.SignInActivity"
-            android:parentActivityName=".ui.main.MainActivity"/>
+            android:parentActivityName=".ui.main.MainActivity" />
 
         <service android:name=".data.SyncService" />
 

@@ -12,16 +12,20 @@ public class UserAccount {
     String password;
     String name;
 
-    public UserAccount(String email, String name, String password){
+    public UserAccount(String email, String name, String password) {
         this.email = email;
         this.name = name;
         this.password = password;
     }
 
-    private UserAccount(){
+    private UserAccount() {
         this.email = EMPTY_USER_DATA;
         this.name = EMPTY_USER_DATA;
         this.password = EMPTY_USER_DATA;
+    }
+
+    public static UserAccount getEmptyUser() {
+        return new UserAccount();
     }
 
     public String getName() {
@@ -34,9 +38,5 @@ public class UserAccount {
 
     public String getPassword() {
         return password;
-    }
-
-    public static UserAccount getEmptyUser(){
-        return new UserAccount();
     }
 }

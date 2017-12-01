@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.AppBarLayout
-    android:id="@+id/toolbarLayout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbarLayout"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:orientation="vertical">
@@ -12,5 +11,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primary"
-        app:title="title"/>
+        app:title="title" />
 </android.support.design.widget.AppBarLayout>

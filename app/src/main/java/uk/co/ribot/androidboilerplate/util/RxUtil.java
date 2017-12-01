@@ -12,8 +12,8 @@ public class RxUtil {
         }
     }
 
-    public static void cancel(Subscription s){
-        if (s !=null){
+    public static void cancel(Subscription s) {
+        if (s != null) {
             s.cancel();
         }
     }

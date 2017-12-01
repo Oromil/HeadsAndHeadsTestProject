@@ -7,7 +7,7 @@ import uk.co.ribot.androidboilerplate.BoilerplateApplication;
  */
 
 public class StringUtil {
-    public static String getStringById(int stringId){
+    public static String getStringById(int stringId) {
         return BoilerplateApplication.getContext().getString(stringId);
     }
 }

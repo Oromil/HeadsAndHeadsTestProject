@@ -12,10 +12,18 @@ import uk.co.ribot.androidboilerplate.injection.component.ApplicationComponent;
 import uk.co.ribot.androidboilerplate.injection.component.DaggerApplicationComponent;
 import uk.co.ribot.androidboilerplate.injection.module.ApplicationModule;
 
-public class BoilerplateApplication extends Application  {
+public class BoilerplateApplication extends Application {
 
-    ApplicationComponent mApplicationComponent;
     private static Context mContext;
+    ApplicationComponent mApplicationComponent;
+
+    public static BoilerplateApplication get(Context context) {
+        return (BoilerplateApplication) context.getApplicationContext();
+    }
+
+    public static Context getContext() {
+        return mContext;
+    }
 
     @Override
     public void onCreate() {
@@ -29,10 +37,6 @@ public class BoilerplateApplication extends Application  {
             Timber.plant(new Timber.DebugTree());
             Fabric.with(mContext, new Crashlytics());
         }
-    }
-
-    public static BoilerplateApplication get(Context context) {
-        return (BoilerplateApplication) context.getApplicationContext();
     }
 
     public ApplicationComponent getComponent() {
@@ -49,7 +53,7 @@ public class BoilerplateApplication extends Application  {
         mApplicationComponent = applicationComponent;
     }
 
-    private void initStetho(){
+    private void initStetho() {
         // Create an InitializerBuilder
         Stetho.InitializerBuilder initializerBuilder =
                 Stetho.newInitializerBuilder(this);
@@ -69,9 +73,5 @@ public class BoilerplateApplication extends Application  {
 
         // Initialize Stetho with the Initializer
         Stetho.initialize(initializer);
-    }
-
-    public static Context getContext(){
-        return mContext;
     }
 }

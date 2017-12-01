@@ -27,14 +27,14 @@ public class PreferencesHelper {
         mPref = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
     }
 
-    public void putUserData(String email, String password, String name){
+    public void putUserData(String email, String password, String name) {
         mPref.edit().putString(USER_EMAIL, email).apply();
         mPref.edit().putString(USER_PASSWORD, password).apply();
         mPref.edit().putString(USER_NAME, name).apply();
     }
 
-    public Map<String, String> getUserData(){
-        Map<String, String>userData = new HashMap<>();
+    public Map<String, String> getUserData() {
+        Map<String, String> userData = new HashMap<>();
         userData.put(USER_EMAIL, mPref.getString(USER_EMAIL, null));
         userData.put(USER_PASSWORD, mPref.getString(USER_PASSWORD, null));
         userData.put(USER_NAME, mPref.getString(USER_NAME, null));

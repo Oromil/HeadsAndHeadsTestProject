@@ -22,10 +22,10 @@ public interface WeatherService {
     String API_KEY = "c4b8f6f5ae94a0c7b188159ddda7c288";
     String UNITS = "metric";
 
-    @GET("data/2.5/weather?appid="+API_KEY+ "&units=" + UNITS)
+    @GET("data/2.5/weather?appid=" + API_KEY + "&units=" + UNITS)
     Observable<Weather> getWeatrher(@Query("lat") float latitude, @Query("lon") float longitude, @Query("lang") String language);
 
-    @GET("data/2.5/weather?appid="+API_KEY+ "&units=" + UNITS)
+    @GET("data/2.5/weather?appid=" + API_KEY + "&units=" + UNITS)
     Observable<Weather> getWeatrher(@Query("lat") double latitude, @Query("lon") double longitude);
 
     class Creator {

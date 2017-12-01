@@ -55,11 +55,11 @@ public class DataManager {
         return mDatabaseHelper.getUser(email).distinct();
     }
 
-    public Observable<Weather>getWeather(float lat, float lon, String language){
+    public Observable<Weather> getWeather(float lat, float lon, String language) {
         return mWeatherServise.getWeatrher(lat, lon, language);
     }
 
-    public Observable<Weather>getWeather(double lat, double lon){
+    public Observable<Weather> getWeather(double lat, double lon) {
         return mWeatherServise.getWeatrher(lat, lon);
     }
 }

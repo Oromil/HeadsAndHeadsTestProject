@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.content.ContentActivity">
 
-    <include layout="@layout/app_bar"/>
+    <include layout="@layout/app_bar" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -16,6 +16,6 @@
         android:clipToPadding="false"
         android:paddingBottom="6dp"
         android:paddingTop="6dp"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical" />
 
 </RelativeLayout>

@@ -1,6 +1,5 @@
 package uk.co.ribot.androidboilerplate.ui.main;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -27,16 +26,6 @@ public class MainActivity extends BaseActivity<MainPresenter, MainMvpView> imple
     Toolbar toolbar;
     @BindView(R.id.progressBar)
     View progressBar;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (getPresenter().hasEnteredUser()) {
-            ContentActivity.start(this);
-        }
-
-    }
 
     @Override
     protected void onResume() {
@@ -68,5 +57,10 @@ public class MainActivity extends BaseActivity<MainPresenter, MainMvpView> imple
     @Override
     public void onCompanentCreated(@NonNull ActivityComponent component) {
         component.inject(this);
+    }
+
+    @Override
+    public void navigateToContentActivity() {
+        ContentActivity.start(this);
     }
 }

@@ -28,13 +28,10 @@ public abstract class BaseActivity<P extends Presenter, V extends MvpView> exten
     private static final AtomicLong NEXT_ID = new AtomicLong(0);
     private static final LongSparseArray<ConfigPersistentComponent>
             sComponentsMap = new LongSparseArray<>();
-
-    private ActivityComponent mActivityComponent;
-    private long mActivityId;
-//    protected ActivityComponent mComponent;
-
     @Inject
     P mPresenter;
+    private ActivityComponent mActivityComponent;
+    private long mActivityId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +57,7 @@ public abstract class BaseActivity<P extends Presenter, V extends MvpView> exten
         setContentView();
         ButterKnife.bind(this);
         setupViews();
-        mPresenter.attachView((V)this);
+        mPresenter.attachView((V) this);
 
     }
 
@@ -81,17 +78,18 @@ public abstract class BaseActivity<P extends Presenter, V extends MvpView> exten
         mPresenter.detachView();
     }
 
-    protected void setupViews(){
+    protected void setupViews() {
         setupActionBar();
     }
 
-    protected void setupActionBar(){}
+    protected void setupActionBar() {
+    }
 
     public ActivityComponent activityComponent() {
         return mActivityComponent;
     }
 
-    public void setContentView(){
+    public void setContentView() {
         super.setContentView(getLayoutId());
     }
 
@@ -99,7 +97,7 @@ public abstract class BaseActivity<P extends Presenter, V extends MvpView> exten
 
     public abstract void onCompanentCreated(@NonNull ActivityComponent component);
 
-    protected P getPresenter(){
+    protected P getPresenter() {
         return mPresenter;
     }
 }

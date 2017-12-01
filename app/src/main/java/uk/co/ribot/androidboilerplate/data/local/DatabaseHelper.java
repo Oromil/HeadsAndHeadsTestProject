@@ -68,15 +68,9 @@ public class DatabaseHelper {
         Observable<UserAccount> user = mDb.createQuery(Db.AccountsTable.TABLE_NAME,
                 "SELECT * FROM " + Db.AccountsTable.TABLE_NAME + " WHERE " +
                         Db.AccountsTable.COLUMN_EMAIL + " = '" + email + "'")
-                .mapToOneOrDefault(cursor -> Db.AccountsTable.parseCursor(cursor), UserAccount.getEmptyUser());
+                .mapToOneOrDefault(Db.AccountsTable::parseCursor,
+                        UserAccount.getEmptyUser());
         return user;
-    }
-
-    public Observable<List<UserAccount>> getUsersList() {
-
-        return mDb.createQuery(Db.AccountsTable.TABLE_NAME,
-                "SELECT * FROM " + Db.AccountsTable.TABLE_NAME)
-                .mapToList(cursor -> Db.AccountsTable.parseCursor(cursor));
     }
 
     public Observable<UserAccount> addUser(final UserAccount user) {
@@ -86,7 +80,8 @@ public class DatabaseHelper {
             }
             BriteDatabase.Transaction transaction = mDb.newTransaction();
             try {
-                long result = mDb.insert(Db.AccountsTable.TABLE_NAME, Db.AccountsTable.toContentValues(user));
+                long result = mDb.insert(Db.AccountsTable.TABLE_NAME,
+                        Db.AccountsTable.toContentValues(user));
                 if (result >= 0)
                     emitter.onNext(user);
                 transaction.markSuccessful();
@@ -94,8 +89,6 @@ public class DatabaseHelper {
                 transaction.end();
             }
         });
-
-
     }
 
 }

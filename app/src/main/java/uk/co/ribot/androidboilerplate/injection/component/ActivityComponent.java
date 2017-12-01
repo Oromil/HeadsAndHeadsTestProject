@@ -16,8 +16,11 @@ import uk.co.ribot.androidboilerplate.ui.signin.SignInActivity;
 public interface ActivityComponent {
 
     void inject(ContentActivity contentActivity);
+
     void inject(RegisterActivity registerActivity);
+
     void inject(MainActivity mainActivity);
+
     void inject(SignInActivity signInActivity);
 
 }
