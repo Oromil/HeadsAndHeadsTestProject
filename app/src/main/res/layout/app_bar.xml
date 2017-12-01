@@ -11,5 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primary"
+        android:theme="@style/CustomActionBar"
         app:title="title" />
 </android.support.design.widget.AppBarLayout>

@@ -1,11 +1,14 @@
 package uk.co.ribot.androidboilerplate.ui.content;
 
+import android.location.Location;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
 
+import io.reactivex.BackpressureStrategy;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -20,20 +23,23 @@ import uk.co.ribot.androidboilerplate.data.model.Ribot;
 import uk.co.ribot.androidboilerplate.data.model.Weather;
 import uk.co.ribot.androidboilerplate.injection.ConfigPersistent;
 import uk.co.ribot.androidboilerplate.ui.base.BasePresenter;
+import uk.co.ribot.androidboilerplate.util.RxEventBus;
 import uk.co.ribot.androidboilerplate.util.RxUtil;
 
 @ConfigPersistent
 public class ContentPresenter extends BasePresenter<ContentMvpView> {
 
     private final DataManager mDataManager;
+    RxEventBus mEventBus;
     private Disposable mRibotDisposable = null;
     private Disposable mWeatherDisposable = null;
     private PreferencesHelper mPreferencesHelper;
 
     @Inject
-    public ContentPresenter(DataManager dataManager) {
+    public ContentPresenter(DataManager dataManager, RxEventBus eventBus) {
         mDataManager = dataManager;
         mPreferencesHelper = mDataManager.getPreferencesHelper();
+        mEventBus = eventBus;
     }
 
     @Override
@@ -43,10 +49,14 @@ public class ContentPresenter extends BasePresenter<ContentMvpView> {
                 .getUserData().get(PreferencesHelper.USER_NAME);
 
         RxUtil.dispose(mWeatherDisposable);
-        mWeatherDisposable = mDataManager
-                .getWeather(35, 139, Locale.getDefault().getLanguage())
+        mWeatherDisposable = mEventBus.filteredObservable(Location.class)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(location -> mDataManager
+                        .getWeather(Float.valueOf(String.valueOf(location.getLatitude())),
+                                Float.valueOf(String.valueOf(location.getLongitude())),
+                                Locale.getDefault().getLanguage())
+                        .toFlowable(BackpressureStrategy.BUFFER))
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(weather -> {
                     Map<String, String> weatherMap = weather.getWeather();
                     ContentPresenter.this.getMvpView()
@@ -61,26 +71,6 @@ public class ContentPresenter extends BasePresenter<ContentMvpView> {
                             .showSnackBar(String.format(BoilerplateApplication.getContext()
                                     .getString(R.string.snackbar_error_message), userName));
                 });
-
-//        final String[] name = new String[1];
-//        RxUtil.dispose(mWeatherDisposable);
-//        mWeatherDisposable = mEventBus.filteredObservable(String.class)
-//                .subscribeOn(Schedulers.io())
-//                .flatMap(s -> {
-//                    name[0] = s;
-//                    return mDataManager.getWeather(35, 139, Locale.getDefault().getLanguage())
-//                            .toFlowable(BackpressureStrategy.BUFFER);
-//                })
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(weather -> {
-//                    Map<String, String> weatherMap = weather.getWeather();
-//
-//                    ContentPresenter.this.getMvpView().showSnackBar(String.format(BoilerplateApplication.getContext()
-//                                    .getResources().getString(R.string.weather_message), name[0],
-//                            weatherMap.get(Weather.CITY), weatherMap.get(Weather.TEMP), weatherMap.get(Weather.DESCRIPTION)));
-//
-//                }, throwable -> ContentPresenter.this.getMvpView().showSnackBar(String.format(BoilerplateApplication.getContext()
-//                        .getString(R.string.snackbar_error_message), name[0])));
     }
 
     @Override

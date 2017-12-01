@@ -26,7 +26,7 @@ import static android.view.View.VISIBLE;
 public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterMvpView> implements RegisterMvpView {
 
     public static final int REQUEST_USER_CODE = 1;
-    public static final String USER_DATA = "user_data";
+    public static final String USER_EMAIL = "user_email";
 
     @BindView(R.id.emailInputLayout)
     TextInputLayout emailInputLayout;
@@ -68,7 +68,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterMv
         super.onCreate(savedInstanceState);
         Intent startIntent = getIntent();
         if (startIntent != null) {
-            String userEmail = startIntent.getStringExtra("email");
+            String userEmail = startIntent.getStringExtra(USER_EMAIL);
             if (userEmail != null) {
                 etEmail.setText(userEmail);
             }
@@ -138,7 +138,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterMv
 
     @Override
     public void showPasswordError(boolean show) {
-        showTextInpuLayoutError(passwordInputLayout, show, R.string.password_error);
+        showTextInpuLayoutError(passwordInputLayout, show, R.string.sign_up_password_error);
 
     }
 

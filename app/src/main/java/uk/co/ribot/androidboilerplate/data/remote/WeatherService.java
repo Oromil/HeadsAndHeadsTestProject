@@ -23,10 +23,8 @@ public interface WeatherService {
     String UNITS = "metric";
 
     @GET("data/2.5/weather?appid=" + API_KEY + "&units=" + UNITS)
-    Observable<Weather> getWeatrher(@Query("lat") float latitude, @Query("lon") float longitude, @Query("lang") String language);
-
-    @GET("data/2.5/weather?appid=" + API_KEY + "&units=" + UNITS)
-    Observable<Weather> getWeatrher(@Query("lat") double latitude, @Query("lon") double longitude);
+    Observable<Weather> getWeatrher(@Query("lat") float latitude, @Query("lon") float longitude,
+                                    @Query("lang") String language);
 
     class Creator {
         public static WeatherService createWeatherServise() {

@@ -1,5 +1,7 @@
 package uk.co.ribot.androidboilerplate.util;
 
+import android.location.Location;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -29,8 +31,8 @@ public class RxEventBus {
         mBusSubject.onNext(event);
     }
 
-    public void signInEvent(String username) {
-        mBusSubject.onNext(username);
+    public void postLocation(Location location) {
+        mBusSubject.onNext(location);
     }
 
     /**

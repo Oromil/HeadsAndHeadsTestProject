@@ -126,7 +126,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter, SignInMvpView>
 
         Intent starter = new Intent(this, RegisterActivity.class);
         if (email != null) {
-            starter.putExtra("email", email);
+            starter.putExtra(RegisterActivity.USER_EMAIL, email);
         }
         startActivityForResult(starter, RegisterActivity.REQUEST_USER_CODE);
     }

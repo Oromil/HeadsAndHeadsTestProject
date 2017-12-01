@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="uk.co.ribot.androidboilerplate">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -13,7 +15,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.main.MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,11 +26,15 @@
 
         <activity
             android:name=".ui.register.RegisterActivity"
-            android:parentActivityName=".ui.signin.SignInActivity" />
-        <activity android:name=".ui.content.ContentActivity" />
+            android:parentActivityName=".ui.signin.SignInActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.content.ContentActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.signin.SignInActivity"
-            android:parentActivityName=".ui.main.MainActivity" />
+            android:parentActivityName=".ui.main.MainActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name=".data.SyncService" />
 

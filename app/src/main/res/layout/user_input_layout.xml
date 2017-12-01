@@ -63,7 +63,7 @@
                         android:hint="@string/name_hint"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:text="Person" />
+                        tools:text="Person" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -84,7 +84,7 @@
                         android:inputType="textWebPassword"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:text="qwerTy01" />
+                        tools:text="qwerTy01" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -107,7 +107,7 @@
                         android:inputType="textWebPassword"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:text="qwerTy01" />
+                        tools:text="qwerTy01" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 

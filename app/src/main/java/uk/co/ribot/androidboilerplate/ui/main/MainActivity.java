@@ -1,6 +1,11 @@
 package uk.co.ribot.androidboilerplate.ui.main;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -19,6 +24,8 @@ import uk.co.ribot.androidboilerplate.ui.signin.SignInActivity;
 
 public class MainActivity extends BaseActivity<MainPresenter, MainMvpView> implements MainMvpView {
 
+    public static final int LOCATION_PERMISSIONS_REQUEST_CODE = 3;
+
     @BindView(R.id.btnEnter)
     Button btnEnter;
 
@@ -28,9 +35,26 @@ public class MainActivity extends BaseActivity<MainPresenter, MainMvpView> imple
     View progressBar;
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public LocationManager getLocationManager() {
+        return (LocationManager) getSystemService(LOCATION_SERVICE);
+    }
+
+    @Override
+    public void requestPermissions() {
+        String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION};
+        ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSIONS_REQUEST_CODE);
     }
 
     @Override
@@ -46,6 +70,7 @@ public class MainActivity extends BaseActivity<MainPresenter, MainMvpView> imple
     protected void setupActionBar() {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setTitle(R.string.app_name);
     }
 
@@ -62,5 +87,20 @@ public class MainActivity extends BaseActivity<MainPresenter, MainMvpView> imple
     @Override
     public void navigateToContentActivity() {
         ContentActivity.start(this);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case LOCATION_PERMISSIONS_REQUEST_CODE: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getPresenter().requestCurrentLocation();
+                } else {
+                    getPresenter().setMockLocation();
+                    getPresenter().checkEnteredUserAndStart();
+                }
+            }
+        }
     }
 }

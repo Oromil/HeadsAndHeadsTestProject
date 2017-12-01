@@ -1,7 +1,5 @@
 package uk.co.ribot.androidboilerplate.data;
 
-import android.util.Log;
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -47,7 +45,6 @@ public class DataManager {
     }
 
     public Observable<UserAccount> saveUser(UserAccount user) {
-        Log.d("SaveUser", "call");
         return mDatabaseHelper.addUser(user).distinct();
     }
 
@@ -57,9 +54,5 @@ public class DataManager {
 
     public Observable<Weather> getWeather(float lat, float lon, String language) {
         return mWeatherServise.getWeatrher(lat, lon, language);
-    }
-
-    public Observable<Weather> getWeather(double lat, double lon) {
-        return mWeatherServise.getWeatrher(lat, lon);
     }
 }

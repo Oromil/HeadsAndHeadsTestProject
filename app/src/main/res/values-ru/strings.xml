@@ -2,8 +2,7 @@
     <string name="dialog_action_ok">OK</string>
     <string name="dialog_action_cancel">Нет</string>
 
-    <string name="empty_ribots">There aren\'t any ribots</string>
-    <string name="error_loading_ribots">There was a problem loading the ribots</string>
+    <string name="error_loading_ribots">Проблемы с загрузкой данных</string>
 
     <string name="sign_up">Создать</string>
     <string name="signin">Войти</string>
@@ -27,10 +26,13 @@
     <string name="dialog_error_title">Извините!</string>
     <string name="user_error_dialog_message">Похоже, что такого пользователя не существует. \n Вы хотите создать аккаунт?</string>
     <string name="password_error">неверный пароль</string>
+    <string name="sign_up_password_error">пароль должен быть не короче 6 символов и содержать хотя бы 1 цифру и заглавную букву</string>
     <string name="email_error">неверный e-mail</string>
+    <string name="name_error">Неверное имя</string>
     <string name="input_data_error">неверные данные</string>
     <string name="repeat_password_error">пароли должны совпадать</string>
     <string name="network_error">Нет интернета</string>
+    <string name="registration_error">Этот пользопатель уже зарегестрирован!</string>
     <string name="snackbar_error_message">Здравствуйте, %s! Извините, но прогноз погоды не доступен, так как отсутствует интернет соединение</string>
 
 </resources>

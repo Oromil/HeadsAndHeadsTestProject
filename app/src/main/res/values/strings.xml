@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroidBoilerPlate</string>
+    <string name="app_name">HeadsAndHeadsTest</string>
 
     <string name="action_settings">Settings</string>
 
@@ -31,6 +31,7 @@
     <string name="dialog_error_title">Sorry!</string>
     <string name="user_error_dialog_message">It seems that such a user does not exist. \n Do you want sign up?</string>
     <string name="password_error">incorrect password</string>
+    <string name="sign_up_password_error">password must be at least 6 characters long and contain at least 1 number and uppercase letter</string>
     <string name="email_error">incorrect e-mail</string>
     <string name="name_error">incorrect name</string>
     <string name="input_data_error">incorrect data</string>

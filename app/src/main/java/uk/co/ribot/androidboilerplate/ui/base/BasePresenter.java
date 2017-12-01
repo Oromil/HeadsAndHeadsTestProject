@@ -15,7 +15,8 @@ public abstract class BasePresenter<T extends MvpView> implements Presenter<T> {
         onViewAttached();
     }
 
-    protected void onViewAttached() {}
+    protected void onViewAttached() {
+    }
 
     @Override
     public void detachView() {

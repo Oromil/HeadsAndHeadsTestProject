@@ -1,5 +1,7 @@
 package uk.co.ribot.androidboilerplate.ui.main;
 
+import android.location.LocationManager;
+
 import uk.co.ribot.androidboilerplate.ui.base.MvpView;
 
 /**
@@ -7,5 +9,9 @@ import uk.co.ribot.androidboilerplate.ui.base.MvpView;
  */
 
 public interface MainMvpView extends MvpView {
+    LocationManager getLocationManager();
+
+    void requestPermissions();
+
     void navigateToContentActivity();
 }
