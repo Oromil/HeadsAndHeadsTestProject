@@ -51,6 +51,7 @@ public class ContentPresenter extends BasePresenter<ContentMvpView> {
         RxUtil.dispose(mWeatherDisposable);
         mWeatherDisposable = mEventBus.filteredObservable(Location.class)
                 .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
                 .flatMap(location -> mDataManager
                         .getWeather(Float.valueOf(String.valueOf(location.getLatitude())),
                                 Float.valueOf(String.valueOf(location.getLongitude())),
